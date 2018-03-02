@@ -7,6 +7,7 @@ $tempColumns = array (
         'label' => 'LLL:EXT:groupdelegation/Resources/Private/Language/locallang.xlf:be_groups.tx_groupdelegation_delegateable',
         'config' => Array (
             'type' => 'select',
+            'renderType' => 'selectMultipleSideBySide',
             'foreign_table' => 'be_groups',
             'foreign_table_where' => ' ORDER BY be_groups.title',
             'MM' => 'tx_groupdelegation_subadmin_begroups_mm',
@@ -20,6 +21,13 @@ $tempColumns = array (
     'tx_groupdelegation_issubadmingroup' => array (
         'exclude' => 1,
         'label' => 'LLL:EXT:groupdelegation/Resources/Private/Language/locallang.xlf:be_groups.tx_groupdelegation_issubadmingroup',
+        'config' => array (
+            'type' => 'check',
+        )
+    ),
+    'tx_groupdelegation_canactivate' => array (
+        'exclude' => 1,
+        'label' => 'LLL:EXT:groupdelegation/Resources/Private/Language/locallang.xlf:be_groups.tx_groupdelegation_canactivate',
         'config' => array (
             'type' => 'check',
         )
@@ -46,14 +54,14 @@ if(isset($extConf['ignoreOrganisationUnit']) && $extConf['ignoreOrganisationUnit
 }
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('be_groups', $tempColumns);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('be_groups', 'tx_groupdelegation_issubadmingroup;;;;1-1-1');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('be_groups', 'tx_groupdelegation_issubadmingroup');
 
 $GLOBALS['TCA']['be_groups']['ctrl']['requestUpdate'] = 'tx_groupdelegation_issubadmingroup';
 $GLOBALS['TCA']['be_groups']['ctrl']['typeicon_column'] = 'tx_groupdelegation_issubadmingroup';
 $GLOBALS['TCA']['be_groups']['ctrl']['typeicon_classes']['1'] = 'extensions-groupdelegation-subadmin-group';
 
 $GLOBALS['TCA']['be_groups']['types']['0']['subtype_value_field']= 'tx_groupdelegation_issubadmingroup';
-$GLOBALS['TCA']['be_groups']['types']['0']['subtypes_addlist']['1'] = 'tx_groupdelegation_delegateable,tx_groupdelegation_organisationunit';
+$GLOBALS['TCA']['be_groups']['types']['0']['subtypes_addlist']['1'] = 'tx_groupdelegation_canactivate,tx_groupdelegation_delegateable,tx_groupdelegation_organisationunit';
 $GLOBALS['TCA']['be_groups']['types']['1']['subtype_value_field']='tx_groupdelegation_issubadmingroup';
-$GLOBALS['TCA']['be_groups']['types']['1']['subtypes_addlist']['1'] = 'tx_groupdelegation_delegateable,tx_groupdelegation_organisationunit';
+$GLOBALS['TCA']['be_groups']['types']['1']['subtypes_addlist']['1'] = 'tx_groupdelegation_canactivate,tx_groupdelegation_delegateable,tx_groupdelegation_organisationunit';
 
