@@ -11,6 +11,7 @@ $tempColumns = array (
             'foreign_table' => 'be_groups',
             'foreign_table_where' => ' ORDER BY be_groups.title',
             'MM' => 'tx_groupdelegation_subadmin_begroups_mm',
+            'enableMultiSelectFilterTextfield' => true,
             'size' => '8',
             'multiple' => '0',
             'autoSizeMax' => 10,
